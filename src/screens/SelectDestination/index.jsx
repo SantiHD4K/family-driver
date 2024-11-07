@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import Button from '../../components/Button';
 
@@ -18,6 +18,10 @@ const data = [
 
 const SelectDestination = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+
+  // Verificar que los parámetros no son undefined
+  const { initialAddress = 'Sin dirección inicial', address = 'Sin destino seleccionado' } = route.params || {};
 
   function renderItem({ item }) {
     return (
@@ -38,7 +42,7 @@ const SelectDestination = () => {
           <S.Dot secondary />
         </S.Timeline>
         <S.FromTo>
-          <S.From>Praça da Estação</S.From>
+          <S.From>{initialAddress}</S.From>
           <S.To>Igreja São José</S.To>
         </S.FromTo>
       </S.TopContainer>
